@@ -1,16 +1,31 @@
 <form #serverForm ="ngForm" (ngSubmit)="addServer(serverForm)">
+  <div>
   <label>Sever Name: </label>
   <input type="text" name="serverName" [(ngModel)]="serverName" >
+  </div>
 
+  <div>
   <label>Sever Id: </label>
   <input type="text" name="serverId" [(ngModel)]="serverId" >
+  </div>
 
+  <div>
   <label>Sever Status: </label>
   <input type="text" name="serverStatus" [(ngModel)]="serverStatus" >
+  </div>
 
   <button type="submit" class="btn btn-primary">Add Server</button>
 </form>
+<hr>
 
 <ul>
-  <li *ngFor="let server of servers">{{ server.serverName}} {{server.serverId}} {{server.serverStatus}} </li>
+  <li *ngFor="let server of servers">
+    <p>Server Name: {{ server.serverName}}</p>
+    <p [ngStyle]="{'color': (server.serverId % 2 === 0)? 'blue':'purple'}">Server ID: {{server.serverId}}</p>
+    <p [ngStyle]="{'color': (server.serverStatus === 'online') ? 'green' : 'red'}">Server Status: {{ server.serverStatus }}</p>
+
+  </li>
 </ul>
+<p>Number of Server: {{getNumberOfServer()}}</p>
+<p>Number of Server Online: {{getNumberOfOnlineServer()}}</p>
+<p>Number of Server Offline: {{getNumberOfOfflineServer()}}</p>
