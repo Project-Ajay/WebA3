@@ -1,31 +1,38 @@
-<form #serverForm ="ngForm" (ngSubmit)="addServer(serverForm)">
+<hr>
+<h3>Server Component</h3>
+<form #serverForm="ngForm" (ngSubmit)="addServer(serverForm)" style="margin-bottom: 20px;">
   <div>
-  <label>Sever Name: </label>
-  <input type="text" name="serverName" [(ngModel)]="serverName" >
+    <label style="font-weight: bold;">Server Name:</label>
+    <input type="text" name="serverName" [(ngModel)]="serverName" style="padding: 5px; border-radius: 5px; border: 1px solid #ccc;">
   </div>
 
-  <div>
-  <label>Sever Id: </label>
-  <input type="text" name="serverId" [(ngModel)]="serverId" >
+  <div style="margin-top: 10px;">
+    <label style="font-weight: bold;">Server Id:</label>
+    <input type="text" name="serverId" [(ngModel)]="serverId" style="padding: 5px; border-radius: 5px; border: 1px solid #ccc;">
   </div>
 
-  <div>
-  <label>Sever Status: </label>
-  <input type="text" name="serverStatus" [(ngModel)]="serverStatus" >
+  <div style="margin-top: 10px;">
+    <label style="font-weight: bold;">Server Status:</label>
+    <select name="serverStatus" [(ngModel)]="serverStatus" style="padding: 5px; border-radius: 5px; border: 1px solid #ccc;">
+      <option value="online">Online</option>
+      <option value="offline">Offline</option>
+    </select>
   </div>
 
-  <button type="submit" class="btn btn-primary">Add Server</button>
+  <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Add Server</button>
 </form>
 <hr>
 
-<ul>
-  <li *ngFor="let server of servers">
-    <p>Server Name: {{ server.serverName}}</p>
-    <p [ngStyle]="{'color': (server.serverId % 2 === 0)? 'blue':'purple'}">Server ID: {{server.serverId}}</p>
-    <p [ngStyle]="{'color': (server.serverStatus === 'online') ? 'green' : 'red'}">Server Status: {{ server.serverStatus }}</p>
+<div *ngFor="let server of servers" style="margin-bottom: 10px;">
+  <p style="font-weight: bold;">Server Name: {{ server.serverName }}</p>
+  <p [ngStyle]="{'font-weight': server.serverStatus === 'online' ? 'bold' : 'normal', 'color': server.serverStatus === 'online' ? 'green' : 'red'}">Server ID: {{ server.serverStatus }}</p>
+  <p [ngStyle]="{'font-weight': server.serverId % 2 === 0 ? 'bold' : 'normal',
+               'color': server.serverId % 2 === 0 ? 'blue' : 'purple'}">
+    Server ID: {{ server.serverId }}
+  </p>
+  <hr>
+</div>
 
-  </li>
-</ul>
-<p>Number of Server: {{getNumberOfServer()}}</p>
-<p>Number of Server Online: {{getNumberOfOnlineServer()}}</p>
-<p>Number of Server Offline: {{getNumberOfOfflineServer()}}</p>
+<p>Total Number of Servers: {{getNumberOfServer()}}</p>
+<p style="font-weight: bold; color: green;">Number of Server Online: {{ getNumberOfOnlineServer() }}</p>
+<p style="font-weight: bold; color: red;">Number of Server Offline: {{ getNumberOfOfflineServer() }}</p>
